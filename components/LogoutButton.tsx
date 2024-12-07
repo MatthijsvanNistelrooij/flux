@@ -8,15 +8,19 @@ const LogoutButton = () => {
   const [user, setUser] = useState(null)
   const router = useRouter()
 
+  console.log(user)
 
-    
   const handleLogout = async () => {
     try {
       await account.deleteSession("current")
-      setUser(null) // Clear user state
-      router.push("/") // Redirect to home
+      setUser(null)
+      router.push("/")
     } catch (err) {
-      console.error("Error logging out:", err.message)
+      if (err instanceof Error) {
+        console.error("Error logging out:", err.message)
+      } else {
+        console.error("Error logging out:", err)
+      }
     }
   }
 
