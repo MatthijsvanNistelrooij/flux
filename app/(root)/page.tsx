@@ -3,7 +3,7 @@
 import LoginButton from "@/components/LoginButton"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Account, Client, Models } from "appwrite"
+import { Account, Client } from "appwrite"
 import LogoutButton from "@/components/LogoutButton"
 
 export default function Home() {
