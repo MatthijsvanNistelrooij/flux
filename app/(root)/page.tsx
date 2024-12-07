@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import LoginButton from "@/components/LoginButton"
@@ -12,7 +13,6 @@ export default function Home() {
 
   const router = useRouter()
 
-  // Initialize Appwrite Client
   const client = new Client()
     .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL!)
     .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
