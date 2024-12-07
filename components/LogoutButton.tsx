@@ -5,10 +5,11 @@ import { Button } from "./ui/button"
 import { useState } from "react"
 
 const LogoutButton = () => {
-  const [user, setUser] = useState(null) // Initialize with null
+  const [user, setUser] = useState(null)
   const router = useRouter()
 
-  // Logout function
+
+    
   const handleLogout = async () => {
     try {
       await account.deleteSession("current")
