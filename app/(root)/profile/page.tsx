@@ -2,24 +2,13 @@
 import Login from "@/app/(auth)/sign-in/page"
 import Collection from "@/components/Collection"
 import LoaderSpinner from "@/components/LoaderSpinner"
+import { User } from "@/types"
 import { Account, Client, Databases, ID, Models } from "appwrite"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 
 // Define types for the user and tokens data
-interface User {
-  $id: string
-  name: string | null
-  email: string
-}
-
-interface UserDocument {
-  tokens: number
-  username: string
-  images: string[]
-  userId: string
-}
 
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null)
