@@ -2,10 +2,12 @@
 import { useRouter } from "next/navigation"
 import { account } from "../lib/appwrite"
 import { Button } from "./ui/button"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { FaSignOutAlt } from "react-icons/fa"
 
 const LogoutButton = () => {
   const [user, setUser] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
   const router = useRouter()
 
   const handleLogout = async () => {
@@ -22,7 +24,22 @@ const LogoutButton = () => {
     }
   }
 
-  return <Button onClick={handleLogout}>Logout</Button>
+  useEffect(() => {
+    const checkWidth = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkWidth()
+    window.addEventListener("resize", checkWidth)
+
+    return () => window.removeEventListener("resize", checkWidth)
+  }, [])
+
+  return (
+    <Button onClick={handleLogout} className="flex items-center">
+      {isMobile ? <FaSignOutAlt /> : "Logout"}
+    </Button>
+  )
 }
 
 export default LogoutButton
