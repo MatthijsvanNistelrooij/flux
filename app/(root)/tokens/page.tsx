@@ -17,14 +17,12 @@ interface UserData {
 }
 
 const TokenManager = () => {
-  const [user, setUser] = useState<UserData | null>(null)
-  const [tokens, setTokens] = useState<number>(0)
-  const [loading, setLoading] = useState<boolean>(true)
   const [purchaseableAmount, setPurchaseableAmount] = useState<number>(0)
   const [userId, setUserId] = useState<string | null>(null)
+  const [user, setUser] = useState<UserData | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [tokens, setTokens] = useState<number>(0)
   const router = useRouter()
-
-  console.log(purchaseableAmount)
 
   const client = new Client()
     .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL!)
@@ -145,10 +143,10 @@ const TokenManager = () => {
         </div>
       </div>
 
-      <div className="flex flex-center flex-col md:flex-row gap-4">
+      <div className="flex flex-center flex-col md:flex-row gap-8">
         <div
           className="bg-gradient-to-r from-slate-200 to-slate-50  text-slate-800 hover:from-slate-300
-        rounded-lg shadow-lg p-6 flex flex-col border justify-center items-center min-w-[320px] max-w-[20vw] h-[46vh]"
+        rounded-lg shadow-lg p-6 flex flex-col justify-center items-center min-w-[320px] max-w-[20vw] h-[40vh]"
         >
           <h3 className="text-2xl font-semibold">Basic Deal</h3>
           <p className="mt-4">Get 50 tokens for only $5</p>
@@ -159,7 +157,7 @@ const TokenManager = () => {
           </ul>
           <Button
             onClick={() => addTokens(50)}
-            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
+            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-800 hover:text-white transition"
           >
             Purchase 50 tokens
           </Button>
@@ -167,7 +165,7 @@ const TokenManager = () => {
 
         <div
           className="bg-gradient-to-r from-slate-200 to-slate-50 text-slate-800 hover:from-slate-300
-        rounded-lg shadow-lg p-6 flex flex-col justify-center border items-center min-w-[320px]  max-w-[18vw] h-[46vh]"
+        rounded-lg shadow-lg p-6 flex flex-col justify-center items-center min-w-[320px]  max-w-[18vw] h-[44vh]"
         >
           <h3 className="text-2xl font-semibold">Premium Deal</h3>
           <p className="mt-4">Get 200 tokens for only $15</p>
@@ -179,7 +177,7 @@ const TokenManager = () => {
           </ul>
           <Button
             onClick={() => addTokens(200)}
-            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
+            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-800 hover:text-white transition"
           >
             Purchase 200 tokens
           </Button>
