@@ -143,7 +143,7 @@ const TokenManager = () => {
         </div>
       </div>
 
-      <div className="flex flex-center flex-col md:flex-row gap-8">
+      <div className="flex flex-center flex-col md:flex-row gap-8 pb-80">
         <div
           className="bg-gradient-to-r from-slate-200 to-slate-50  text-slate-800 hover:from-slate-300
         rounded-lg shadow-lg p-6 flex flex-col justify-center items-center min-w-[320px] max-w-[20vw] h-[40vh]"
@@ -165,7 +165,7 @@ const TokenManager = () => {
 
         <div
           className="bg-gradient-to-r from-slate-200 to-slate-50 text-slate-800 hover:from-slate-300
-        rounded-lg shadow-lg p-6 flex flex-col justify-center items-center min-w-[320px]  max-w-[18vw] h-[44vh] mb-40"
+        rounded-lg shadow-lg p-6 flex flex-col justify-center items-center min-w-[320px]  max-w-[18vw] h-[44vh]"
         >
           <h3 className="text-2xl font-semibold">Premium Deal</h3>
           <p className="mt-4">Get 200 tokens for only $15</p>
