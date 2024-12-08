@@ -174,17 +174,17 @@ const ImageComponent: React.FC = () => {
       )}
 
       {!loading && !imageUrl && (
-        <div className="flex flex-row gap-2 w-full max-w-5xl px-4">
+        <div className="flex flex-col lg:flex-row text-center gap-2 w-full max-w-3xl px-4">
           <Input
             type="text"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="A futuristic city with flying cars and neon lights"
-            className="w-2/4"
+            className="lg:w-2/4"
           />
 
           <Select value={model} onValueChange={(value) => setModel(value)}>
-            <SelectTrigger className="w-40">
+            <SelectTrigger className="lg:w-40">
               <span>{model}</span>
             </SelectTrigger>
             <SelectContent>
@@ -201,7 +201,7 @@ const ImageComponent: React.FC = () => {
 
           <Button
             onClick={handleGenerateImage}
-            className="w-1/4 bg-orange-500 text-white font-bold text-lg py-2 rounded-md hover:bg-orange-400 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="lg:w-1/4 bg-orange-500 text-white font-bold text-lg py-2 rounded-md hover:bg-orange-400 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={loading}
           >
             Generate
