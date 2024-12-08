@@ -2,23 +2,30 @@
 import Login from "@/app/(auth)/sign-in/page"
 import Collection from "@/components/Collection"
 import LoaderSpinner from "@/components/LoaderSpinner"
-import { Account, Client, Databases } from "appwrite"
+import { Account, Client, Databases, ID, Models } from "appwrite"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 
-// Define types for the user data
+// Define types for the user and tokens data
 interface User {
   $id: string
   name: string | null
   email: string
 }
 
+interface UserDocument {
+  tokens: number
+  username: string
+  images: string[]
+  userId: string
+}
+
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [tokens, setTokens] = useState<number>(0)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<Error | null>(null)
 
   const router = useRouter()
 
@@ -30,50 +37,78 @@ const Profile = () => {
   const databases = new Databases(client)
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const checkAndCreateUserDocument = async () => {
       try {
+        console.log("Fetching Appwrite user session...")
         const userData = await account.get()
         setUser(userData)
 
-        const { $id, name } = userData
-        const username = name || "Anonymous"
+        if (userData) {
+          const { $id, name, email } = userData
+          const username = name || "Anonymous"
 
-        try {
-          const userDoc = await databases.getDocument(
-            process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
-            process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
-            $id
-          )
-          setTokens(userDoc.tokens || 0)
-        } catch (docError: any) {
-          if (docError.code === 404) {
-            // Document not found, create one
-            await databases.createDocument(
+          console.log("Checking for existing user document in the database...")
+          try {
+            const existingDocument = await databases.getDocument(
               process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
               process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
-              $id,
-              {
-                username,
-                images: [],
-                tokens: 50,
-                userId: $id,
-              }
+              $id
             )
-            setTokens(50)
-          } else {
-            throw docError
+          } catch (docError: any) {
+            if (docError.code === 404) {
+              console.log("User document not found, creating a new one...")
+              await databases.createDocument(
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+                process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+                $id,
+                {
+                  username,
+                  images: [],
+                  tokens: 50,
+                  userId: $id,
+                }
+              )
+              console.log("User document created successfully.")
+            } else {
+              console.error("Error checking user document:", docError)
+            }
           }
         }
       } catch (err) {
-        console.error("Error fetching user or document:", err)
-        setError("Failed to fetch user data.")
+        console.error("Error fetching Appwrite user session:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    checkAndCreateUserDocument()
+  }, [router])
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const session = await account.get()
+        const userId = session.$id
+        setUser(session)
+
+        const userDoc = await databases.getDocument(
+          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+          userId
+        )
+
+        setTokens(userDoc.tokens || 0)
+      } catch (err) {
+        console.error("Error fetching user data or tokens:", err)
       } finally {
         setLoading(false)
       }
     }
 
     fetchUserData()
-  }, [router])
+  }, [])
+
+  const filter = "profile"
 
   if (loading) {
     return (
@@ -84,7 +119,7 @@ const Profile = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <div>Error: {error.message}</div>
   }
 
   if (!user) return <Login />
@@ -106,7 +141,7 @@ const Profile = () => {
           </Link>
         </div>
       </div>
-      <Collection filter="profile" />
+      <Collection filter={filter} />
     </div>
   )
 }
