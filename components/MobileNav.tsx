@@ -13,7 +13,7 @@ interface User {
   $id: string
   name: string
   email: string
-  [key: string]: any // Allow for additional fields if necessary
+  [key: string]: any
 }
 
 interface ErrorState {

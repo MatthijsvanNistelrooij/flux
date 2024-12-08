@@ -146,7 +146,7 @@ const ImageDetails = () => {
           created by {post.user}
           <span>{formattedDate}</span>
         </p>
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between mt-3">
           <Button onClick={handleDownload}>Download</Button>
           {user?.$id === post.userId && (
             <Button onClick={deletePost} className="bg-orange-400">
