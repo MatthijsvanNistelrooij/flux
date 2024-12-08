@@ -8,8 +8,7 @@ import LogoutButton from "./LogoutButton"
 import { account } from "../lib/appwrite"
 import { sidebarLinks } from "@/constants"
 import { usePathname } from "next/navigation"
-import logo from "../public/m-favicon-color.png"
-// Define types for the user and error state
+import logo from "../public/logo.svg"
 interface User {
   $id: string
   name: string
@@ -47,7 +46,7 @@ const MobileNav = () => {
     <div className="mobile-nav bg-white shadow-sm fixed w-full top-0 z-50">
       <nav className="flex items-center justify-between w-full">
         <Link href="/" className="flex flex-row">
-                  <Image src={logo} alt="logo" width={40} height={40} />
+          <Image src={logo} alt="logo" width={40} height={40} />
         </Link>
 
         <div className="flex items-center gap-4 md:gap-8 md:ml-10">
