@@ -2,22 +2,36 @@
 import Login from "@/app/(auth)/sign-in/page"
 import Collection from "@/components/Collection"
 import LoaderSpinner from "@/components/LoaderSpinner"
-import { Account, Client, Databases, ID } from "appwrite"
+import { Account, Client, Databases, ID, Models } from "appwrite"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 
+// Define types for the user and tokens data
+interface User {
+  $id: string
+  name: string | null
+  email: string
+}
+
+interface UserDocument {
+  tokens: number
+  username: string
+  images: string[]
+  userId: string
+}
+
 const Profile = () => {
-  const [user, setUser] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [tokens, setTokens] = useState(0)
-  const [error, setError] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [tokens, setTokens] = useState<number>(0)
+  const [error, setError] = useState<Error | null>(null)
 
   const router = useRouter()
 
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID)
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL as string)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID as string)
 
   const account = new Account(client)
   const databases = new Databases(client)
@@ -36,16 +50,16 @@ const Profile = () => {
           console.log("Checking for existing user document in the database...")
           try {
             const existingDocument = await databases.getDocument(
-              process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-              process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID,
+              process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
+              process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID as string,
               $id
             )
           } catch (docError) {
             if (docError.code === 404) {
               console.log("User document not found, creating a new one...")
               await databases.createDocument(
-                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-                process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID,
+                process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
+                process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID as string,
                 $id,
                 {
                   username,
@@ -73,19 +87,17 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Fetch authenticated user session
         const session = await account.get()
-        const userId = session.$id // Appwrite user ID
+        const userId = session.$id
         setUser(session)
 
-        // Fetch user document from the database using the Appwrite user ID
         const userDoc = await databases.getDocument(
-          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID, // Replace with your Database ID
-          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID, // Replace with your User Collection ID
-          userId // Appwrite user ID, used as the document ID in your custom collection
+          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
+          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID as string,
+          userId
         )
-        // Set tokens from the fetched user document
-        setTokens(userDoc.tokens || 0) // Default to 0 if tokens is undefined
+
+        setTokens(userDoc.tokens || 0)
       } catch (err) {
         console.error("Error fetching user data or tokens:", err)
       } finally {
@@ -107,7 +119,7 @@ const Profile = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>
+    return <div>Error: {error.message}</div>
   }
 
   if (!user) return <Login />
@@ -123,7 +135,7 @@ const Profile = () => {
         <div className="mt-6 flex justify-center">
           <Link
             href="/tokens"
-            className="bg-white text-slate-700 border  font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
+            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
           >
             Purchase Tokens
           </Link>

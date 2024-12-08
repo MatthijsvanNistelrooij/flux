@@ -9,19 +9,25 @@ import { Account, Client } from "appwrite"
 import { useRouter } from "next/navigation"
 import Login from "@/app/(auth)/sign-in/page"
 
+interface UserData {
+  $id: string
+  name: string
+  email: string
+}
+
 const TokenManager = () => {
-  const [user, setUser] = useState(null)
-  const [tokens, setTokens] = useState(0)
-  const [loading, setLoading] = useState(true)
-  const [purchaseableAmount, setPurchaseableAmount] = useState(0)
-  const [userId, setUserId] = useState(null)
+  const [user, setUser] = useState<UserData | null>(null)
+  const [tokens, setTokens] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [purchaseableAmount, setPurchaseableAmount] = useState<number>(0)
+  const [userId, setUserId] = useState<string | null>(null)
   const router = useRouter()
 
   console.log(purchaseableAmount)
 
   const client = new Client()
-    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL)
-    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID)
+    .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL!)
+    .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!)
   const account = new Account(client)
 
   useEffect(() => {
@@ -46,8 +52,8 @@ const TokenManager = () => {
         setUser(session)
 
         const userDoc = await databases.getDocument(
-          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID,
+          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
           userId
         )
         setTokens(userDoc.tokens || 0)
@@ -62,36 +68,37 @@ const TokenManager = () => {
   }, [])
 
   // Function to update tokens based on the amount
-  const addTokens = async (amount) => {
+  const addTokens = async (amount: number): Promise<void> => {
     setPurchaseableAmount(amount)
 
     try {
-      const userId = user.$id // Get the user ID from the session
+      const userId = user?.$id // Get the user ID from the session
 
-      // Fetch the user's document again to get the current tokens
-      const userDoc = await databases.getDocument(
-        process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-        process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID,
-        userId
-      )
+      if (userId) {
+        // Fetch the user's document again to get the current tokens
+        const userDoc = await databases.getDocument(
+          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+          userId
+        )
 
-      // Increment the token count by the amount passed
-      const newTokenCount = (userDoc.tokens || 0) + amount
+        // Increment the token count by the amount passed
+        const newTokenCount = (userDoc.tokens || 0) + amount
 
-      // Update the token count in the database
-      await databases.updateDocument(
-        process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID,
-        process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID,
-        userId,
-        { tokens: newTokenCount }
-      )
+        // Update the token count in the database
+        await databases.updateDocument(
+          process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
+          process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+          userId,
+          { tokens: newTokenCount }
+        )
 
-      toast.success("Tokens added successfully!") // Show success toast
-      // Update the token count in the UI
-      setTokens(newTokenCount)
+        toast.success("Tokens added successfully!") // Show success toast
+        // Update the token count in the UI
+        setTokens(newTokenCount)
+      }
     } catch (err) {
       toast.error("Failed to add tokens.") // Show error toast
-
       console.error("Error updating tokens:", err)
     }
   }
@@ -103,7 +110,7 @@ const TokenManager = () => {
       </div>
     )
 
-  if (!user) return <Login /> 
+  if (!user) return <Login />
 
   return (
     <div className="p-6 space-y-8">
@@ -116,7 +123,7 @@ const TokenManager = () => {
         <div className="mt-6 flex justify-center">
           <Link
             href="/create"
-            className="bg-white text-slate-700 border  font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
+            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
           >
             Create Image
           </Link>
@@ -157,7 +164,7 @@ const TokenManager = () => {
           </ul>
           <Button
             onClick={() => addTokens(200)}
-            className="bg-white text-slate-700 border  font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
+            className="bg-white text-slate-700 border font-semibold px-6 py-1 rounded-lg mt-6 hover:bg-gray-100 transition"
           >
             Purchase 200 tokens
           </Button>
