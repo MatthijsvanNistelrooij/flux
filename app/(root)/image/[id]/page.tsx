@@ -148,9 +148,9 @@ const ImageDetails = () => {
         </p>
         <div className="flex flex-row">
           <Button onClick={handleDownload}>Download</Button>
-          <Button disabled={user?.$id !== post.userId} onClick={deletePost}>
-            Delete
-          </Button>
+          {user?.$id === post.userId && (
+            <Button onClick={deletePost}>Delete</Button>
+          )}
         </div>
       </div>
     </div>
