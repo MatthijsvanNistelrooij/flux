@@ -11,8 +11,8 @@ const LoginButton = () => {
       console.log("Starting Google login process...")
       await account.createOAuth2Session(
         "google" as OAuthProvider,
-        "http://localhost:3000/",
-        "http://localhost:3000/fail"
+        "https://flux-sage.vercel.app/",
+        "https://flux-sage.vercel.app/fail"
       )
     } catch (err) {
       console.error("Error during Google login:", err)
