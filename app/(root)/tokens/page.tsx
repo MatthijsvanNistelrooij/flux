@@ -114,7 +114,7 @@ const TokenManager = () => {
 
   return (
     <div className="p-6 space-y-8">
-      <div className="bg-white rounded-lg shadow-lg p-6 mt-20 lg:mt-0">
+      <div className="bg-white rounded-lg shadow-sm p-6 mt-20 lg:mt-0">
         <h1 className="text-3xl font-semibold text-center">Tokens</h1>
         <div className="mt-4 text-center">
           <h2 className="text-xl font-bold">{user?.name}</h2>
@@ -132,7 +132,7 @@ const TokenManager = () => {
 
       <div className="flex flex-center flex-col md:flex-row gap-4">
         <div
-          className="bg-gradient-to-t from-slate-600 to-slate-50  text-slate-800 
+          className="bg-gradient-to-r from-slate-600 to-slate-50  text-slate-800 
         rounded-lg shadow-lg p-6 flex flex-col border justify-center items-center min-w-[320px] max-w-[20vw] h-[46vh]"
         >
           <h3 className="text-2xl font-semibold">Basic Deal</h3>
@@ -151,7 +151,7 @@ const TokenManager = () => {
         </div>
 
         <div
-          className="bg-gradient-to-t from-slate-600 to-slate-50 text-slate-800 
+          className="bg-gradient-to-r from-slate-600 to-slate-50 text-slate-800 
         rounded-lg shadow-lg p-6 flex flex-col justify-center border items-center min-w-[320px]  max-w-[18vw] h-[46vh]"
         >
           <h3 className="text-2xl font-semibold">Premium Deal</h3>

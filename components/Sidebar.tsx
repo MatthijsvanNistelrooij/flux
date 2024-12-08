@@ -10,6 +10,7 @@ import { Account, Client } from "appwrite"
 import { User } from "@/types"
 import { Button } from "./ui/button"
 import { sidebarLinks } from "@/constants"
+import logo from "../public/m-favicon-color.png"
 
 const Sidebar = () => {
   const [user, setUser] = useState<User | null>(null)
