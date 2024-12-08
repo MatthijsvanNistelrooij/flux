@@ -130,7 +130,9 @@ const ImageDetails = () => {
   return (
     <div className="flex-center h-screen p-5">
       <div className="mt-10 lg:mt-0">
-        <h1 className="font-semibold border-t border-l border-r p-2">{post.title}</h1>
+        <h1 className="font-semibold border-t border-l border-r p-2">
+          {post.title}
+        </h1>
         {imageUrl && (
           <Image
             src={imageUrl}
@@ -145,17 +147,8 @@ const ImageDetails = () => {
           <span>{formattedDate}</span>
         </p>
         <div className="flex flex-row">
-          <Button
-            onClick={handleDownload}
-            className="text-16 w-full bg-orange-500 font-semibold text-white hover:bg-orange-400 rounded-none"
-          >
-            Download
-          </Button>
-          <Button
-            disabled={user?.$id !== post.userId}
-            className="text-16 text-orange-400 bg-white font-semibold hover:bg-gray-100 border w-full rounded-none"
-            onClick={deletePost}
-          >
+          <Button onClick={handleDownload}>Download</Button>
+          <Button disabled={user?.$id !== post.userId} onClick={deletePost}>
             Delete
           </Button>
         </div>
