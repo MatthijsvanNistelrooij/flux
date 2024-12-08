@@ -46,6 +46,9 @@ const Sidebar = () => {
         <Link href={"/profile"} className="nav-link">
           Profile
         </Link>
+        <Link href={"/tokens"} className="nav-link">
+          Tokens
+        </Link>
       </div>
       <div>
         {user && (
