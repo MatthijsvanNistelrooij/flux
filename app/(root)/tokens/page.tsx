@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
-import { account, databases } from "../../../lib/appwrite" // Ensure this matches your setup
+import { account, databases } from "@/lib/appwrite" // Ensure this matches your setup
 import LoaderSpinner from "@/components/LoaderSpinner"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 import { Account, Client } from "appwrite"
 import { useRouter } from "next/navigation"
 import Login from "@/app/(auth)/sign-in/page"
+import getStripe from "@/lib/getStripe"
 
 interface UserData {
   $id: string
@@ -67,25 +68,20 @@ const TokenManager = () => {
     fetchUserData()
   }, [])
 
-  // Function to update tokens based on the amount
   const addTokens = async (amount: number): Promise<void> => {
     setPurchaseableAmount(amount)
 
     try {
-      const userId = user?.$id // Get the user ID from the session
+      const userId = user?.$id
 
       if (userId) {
-        // Fetch the user's document again to get the current tokens
         const userDoc = await databases.getDocument(
           process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
           process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
           userId
         )
-
-        // Increment the token count by the amount passed
         const newTokenCount = (userDoc.tokens || 0) + amount
 
-        // Update the token count in the database
         await databases.updateDocument(
           process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
           process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
@@ -93,14 +89,33 @@ const TokenManager = () => {
           { tokens: newTokenCount }
         )
 
-        toast.success("Tokens added successfully!") // Show success toast
-        // Update the token count in the UI
+        toast.success("Tokens added successfully!")
         setTokens(newTokenCount)
       }
     } catch (err) {
-      toast.error("Failed to add tokens.") // Show error toast
+      toast.error("Failed to add tokens.")
       console.error("Error updating tokens:", err)
     }
+  }
+
+  const handleCheckout = async () => {
+    //   const handleCheckout = async (tokens: number) => {
+    console.log(tokens)
+    // const stripe = await getStripe()
+    // const response = await fetch("../../../api/stripe", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ tokens }),
+    // })
+
+    // if (response.status === 500) return
+
+    // const data = await response.json()
+    // toast.loading("Redirecting...")
+
+    // stripe.redirectToCheckout({ sessionId: data.id })
   }
 
   if (loading)
