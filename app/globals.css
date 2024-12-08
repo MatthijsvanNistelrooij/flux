@@ -73,10 +73,10 @@
     @apply bg-white flex flex-row fixed top-0 left-0 w-full h-[40px] items-center justify-between z-10 border-b lg:hidden p-8;
   }
   .sidebar {
-    @apply sticky left-0 top-0 w-fit flex-col justify-between border-r pt-8 hidden lg:flex lg:w-[270px];
+    @apply sticky left-0 top-0 w-fit flex-col justify-between border-r hidden lg:flex lg:w-[270px];
   }
   .nav-link {
-    @apply p-2 bg-slate-200 hover:bg-slate-300 w-full font-bold text-slate-600;
+    @apply p-3 bg-slate-200 hover:bg-slate-300 w-full font-bold text-slate-600;
   }
   .flex-center {
     @apply flex items-center justify-center;

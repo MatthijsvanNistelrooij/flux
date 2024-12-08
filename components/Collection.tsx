@@ -43,8 +43,10 @@ const Collection = ({ filter }: CollectionProps) => {
 
         const filteredPosts =
           filter === "profile" && userId
-            ? response.documents.filter((post) => post.userId === userId)
-            : response.documents
+            ? (response.documents as Post[]).filter(
+                (post) => post.userId === userId
+              )
+            : (response.documents as Post[])
 
         setPosts(filteredPosts)
       } catch (err: any) {

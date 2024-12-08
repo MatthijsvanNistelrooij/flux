@@ -1,8 +1,11 @@
-import React from 'react'
+import LoginButton from "@/components/LoginButton"
+import React from "react"
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <div className="flex-center border h-screen">
+      <LoginButton />
+    </div>
   )
 }
 

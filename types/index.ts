@@ -1,3 +1,5 @@
+import { Models } from "appwrite"
+
 export interface User {
   $id: string
   name?: string
@@ -5,11 +7,11 @@ export interface User {
   tokens?: number
 }
 
-export interface Post {
+export interface Post extends Models.Document {
   title: string
   description: string
   imageId: string
-  creator: User
+  creator: User // Assuming `User` is another defined type
   userId: string
   user: string
 }

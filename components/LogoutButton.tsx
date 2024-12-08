@@ -12,7 +12,7 @@ const LogoutButton = () => {
     try {
       await account.deleteSession("current")
       setUser(null)
-      router.push("/")
+      router.push("/sign-in")
     } catch (err) {
       if (err instanceof Error) {
         console.error("Error logging out:", err.message)
