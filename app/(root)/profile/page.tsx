@@ -54,7 +54,7 @@ const Profile = () => {
               process.env.NEXT_PUBLIC_APPWRITE_USER_COLLECTION_ID as string,
               $id
             )
-          } catch (docError) {
+          } catch (docError: any) {
             if (docError.code === 404) {
               console.log("User document not found, creating a new one...")
               await databases.createDocument(
