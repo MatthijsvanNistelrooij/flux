@@ -8,8 +8,6 @@ const LogoutButton = () => {
   const [user, setUser] = useState(null)
   const router = useRouter()
 
-  console.log(user)
-
   const handleLogout = async () => {
     try {
       await account.deleteSession("current")
@@ -24,14 +22,7 @@ const LogoutButton = () => {
     }
   }
 
-  return (
-    <Button
-      onClick={handleLogout}
-      className="bg-white text-slate-700 border font-bold px-6 py-1 rounded-md hover:bg-gray-100 transition text-md"
-    >
-      Logout
-    </Button>
-  )
+  return <Button onClick={handleLogout}>Logout</Button>
 }
 
 export default LogoutButton

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react"
 
 const MobileNav = () => {
-  return (
-    <div>MobileNav</div>
-  )
+  return <nav className="mobile-nav">MobileNav</nav>
 }
 
 export default MobileNav
