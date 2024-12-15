@@ -19,6 +19,16 @@ const Collection = ({ filter }: CollectionProps) => {
   const [previews, setPreviews] = useState<Record<string, string>>({})
   const [userId, setUserId] = useState<string | null>(null)
 
+  const [modalImage, setModalImage] = useState(null)
+
+  const handleShowImage = (image: any) => {
+    setModalImage(image)
+  }
+
+  const handleCloseModal = () => {
+    setModalImage(null)
+  }
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -146,8 +156,11 @@ const Collection = ({ filter }: CollectionProps) => {
                         className="w-full h-auto object-cover scale-105 hover:scale-100 transition-scale duration-300"
                       />
                     </div>
-                    <div className="absolute top-0 bg-slate-600 opacity-60 text-slate-200 p-1 text-xs">
-                      created by {post.user}
+                    <div className="absolute top-0 bg-slate-800 opacity-70 text-slate-200 p-1 text-xs">
+                      created by {post?.title}
+                    </div>
+                    <div className="absolute bottom-0 right-0 bg-slate-800 opacity-70 text-slate-200 p-1 text-xs">
+                      created by {post?.user}
                     </div>
                   </div>
                 )}

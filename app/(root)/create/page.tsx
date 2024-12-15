@@ -211,7 +211,7 @@ const ImageComponent: React.FC = () => {
       {error && !loading && <p className="text-red-500 text-start">{error}</p>}
 
       {!loading && imageUrl && (
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center">
           <Image
             width={600}
             height={600}
@@ -220,15 +220,15 @@ const ImageComponent: React.FC = () => {
             className="rounded-none shadow-md"
           />
 
-          <div className="flex gap-2 w-full">
+          <div className="flex w-full">
             <Button
-              className="w-full bg-orange-500 text-white font-bold py-2 rounded-none hover:bg-orange-400"
+              className="w-full bg-gray-100 text-gray-800 font-bold py-2 rounded-none hover:bg-orange-500"
               onClick={handleUploadImage}
             >
               Save
             </Button>
             <Button
-              className="w-full bg-gray-100 text-gray-800 font-bold py-2 rounded-none hover:bg-gray-200"
+              className="w-full bg-gray-100 text-red-500 font-bold py-2 rounded-none hover:bg-black"
               onClick={handleDeleteImage}
             >
               Discard

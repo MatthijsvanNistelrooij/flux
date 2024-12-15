@@ -11,6 +11,7 @@ import LoaderSpinner from "@/components/LoaderSpinner"
 import Image from "next/image"
 
 import "react-toastify/dist/ReactToastify.css"
+import { FaDownload, FaTrash, FaTrashAlt } from "react-icons/fa"
 
 const client = new Client()
   .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_URL!)
@@ -130,9 +131,6 @@ const ImageDetails = () => {
   return (
     <div className="flex-center h-screen p-5">
       <div className="mt-10 lg:mt-0">
-        <h1 className="font-semibold border-t border-l border-r p-2">
-          {post.title}
-        </h1>
         {imageUrl && (
           <Image
             src={imageUrl}
@@ -142,17 +140,17 @@ const ImageDetails = () => {
             priority
           />
         )}
-        <p className="bg-gray-100 text-xs text-slate-300 p-2">
-          created by {post.user}
-          <span>{formattedDate}</span>
-        </p>
-        <div className="flex flex-row justify-between mt-3">
-          <Button onClick={handleDownload}>Download</Button>
-          {user?.$id === post.userId && (
-            <Button onClick={deletePost} className="bg-orange-400">
-              Delete
-            </Button>
-          )}
+
+        <div className="flex flex-row justify-between">
+          <div>
+            <FaTrash className="cursor-pointer m-5" onClick={deletePost} />
+          </div>
+
+          <div className="mt-2 text-center text-sm text-gray-700">
+            <p>{post.title}</p>
+            <p>Created by {post.user}</p>
+          </div>
+          <FaDownload className="cursor-pointer m-5" onClick={handleDownload} />
         </div>
       </div>
     </div>
