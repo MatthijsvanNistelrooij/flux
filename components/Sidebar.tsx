@@ -44,9 +44,15 @@ const Sidebar = () => {
     <nav className="sidebar">
       <div>
         <Link href={"/"} className="border-b p-3">
-          <Image alt="logo" src={logo} width={50} height={50} className="ml-3" />
+          <Image
+            alt="logo"
+            src={logo}
+            width={40}
+            height={40}
+            className="ml-4 -mt-3"
+          />
         </Link>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-5 p-5">
           {sidebarLinks.map(({ route, label, imgURL }) => {
             const isActive =
               pathname === route || pathname.startsWith(`${route}/`)
@@ -56,14 +62,15 @@ const Sidebar = () => {
                 href={route}
                 key={label}
                 className={cn(
-                  "flex gap-3 items-center py-4 max-lg:px-4 justify-start lg:justify-start hover:border-r-4 border-orange-400 pl-4 hover:bg-gradient-to-r from-gray-50 to-slate-300",
+                  "inline-flex items-center justify-center text-sm font-bold rounded-md px-4 py-2 transition-colors",
                   {
-                    "bg-nav-focus border-r-4 border-orange-400 bg-gradient-to-r from-slate-50 to-slate-300":
+                    "bg-[#171717] text-orange-400 hover:bg-[#272727] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#444444]":
                       isActive,
+                    "text-gray-800 hover:bg-white hover:text-black": !isActive,
                   }
                 )}
               >
-                <p className="font-semibold text-gray-800">{label}</p>
+                {label}
               </Link>
             )
           })}

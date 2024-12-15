@@ -15,3 +15,11 @@ export interface Post extends Models.Document {
   userId: string
   user: string
 }
+
+export interface Comment {
+  content: string
+  userId: string
+  user: User
+  image: Post
+  createdAt: string
+}

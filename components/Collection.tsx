@@ -157,7 +157,7 @@ const Collection = ({ filter }: CollectionProps) => {
                       />
                     </div>
                     <div className="absolute top-0 bg-slate-800 opacity-70 text-slate-200 p-1 text-xs">
-                      created by {post?.title}
+                      {post?.title}
                     </div>
                     <div className="absolute bottom-0 right-0 bg-slate-800 opacity-70 text-slate-200 p-1 text-xs">
                       created by {post?.user}
