@@ -80,25 +80,27 @@ const Contact = () => {
   }
 
   return (
-    <section className="flex-center h-screen p-5 lg:p-0 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
+    <section className="flex items-center justify-center h-screen p-5 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
       {alert.show && <Alert {...alert} />}
 
-      <div className="lg:w-[500px] md:w-[400px] min-w-[300px]" onClick={(e) => e.stopPropagation()}>
+      {/* White card container */}
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-[500px]">
+        <h3 className="font-semibold text-2xl mb-6 text-center">Contact</h3>
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="flex flex-col space-y-7"
+          className="flex flex-col space-y-5"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col gap-2">
-            <h3 className="font-semibold text-2xl mb-2">Contact</h3>
             <Input
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
               required
-              placeholder="naam"
+              placeholder="Naam"
+              className="border-gray-300 focus:ring focus:ring-indigo-200"
             />
           </div>
 
@@ -109,7 +111,8 @@ const Contact = () => {
               value={form.email}
               onChange={handleChange}
               required
-              placeholder="e-mail"
+              placeholder="E-mail"
+              className="border-gray-300 focus:ring focus:ring-indigo-200"
             />
           </div>
 
@@ -120,11 +123,12 @@ const Contact = () => {
               onChange={handleChange}
               required
               rows={5}
-              placeholder="je bericht"
+              placeholder="Je bericht"
+              className="border-gray-300 focus:ring focus:ring-indigo-200"
             />
           </div>
           <Button
-            className="rounded-lg p-2 w-full"
+            className="rounded-lg p-2 w-full text-white"
             type="submit"
             disabled={loading}
           >
