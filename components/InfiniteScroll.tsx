@@ -165,7 +165,7 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
 
       {filteredPosts.map((post) => (
         <Link key={post.$id} href={`/image/${post.$id}`}>
-          <div className="flex flex-col lg:flex-row border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-40">
+          <div className="flex flex-col lg:flex-row border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-40 p-5">
             {/* Image Section */}
             {previews[post.$id] && (
               <div className="relative w-full lg:w-2/3">
