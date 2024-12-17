@@ -173,22 +173,9 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
                   alt={post.title}
                   width={1920}
                   height={1080}
-                  className="object-cover w-full"
+                  className="object-cover w-full rounded-md"
                 />
-                <div className="flex flex-row justify-between items-center w-full mt-3">
-                  <FaTrash
-                    className="cursor-pointer text-gray-600 hover:text-red-500"
-                    // onClick={deletePost}
-                  />
-                  <div className="text-center text-gray-700">
-                    <p className="text-lg">{post.title}</p>
-                    <p className="text-sm">Created by {post.user}</p>
-                  </div>
-                  <FaDownload
-                    className="cursor-pointer text-gray-600 hover:text-green-500"
-                    // onClick={handleDownload}
-                  />
-                </div>
+
               </Link>
             </div>
           )}
