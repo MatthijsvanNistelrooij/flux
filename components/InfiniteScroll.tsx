@@ -147,7 +147,7 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
 
   if (posts.length === 0) {
     return (
-      <div className="flex-center flex-col">
+      <div className="flex-center mt-0 flex-col">
         <h3 className="font-semibold text-2xl mb-2">You have no Images yet</h3>
         <Link
           href={"/create"}
@@ -160,13 +160,13 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
   }
 
   return (
-    <div className="mx-auto mb-40 max-w-xl lg:max-w-5xl">
+    <div className="mx-auto mt-20 mb-40 max-w-xl lg:max-w-5xl">
       <SearchBar onSearch={setSearchQuery} />
 
       {filteredPosts.map((post) => (
         <div
           key={post.$id}
-          className="w-full flex flex-col items-center mb-10 0 h-screen min-h-[1000px] justify-center"
+          className="w-full flex flex-col items-center mb-10 0 h-screen justify-center"
         >
           <div className="flex w-full">
             <div className="flex-1 relative">
