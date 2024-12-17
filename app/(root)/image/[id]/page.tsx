@@ -171,7 +171,7 @@ const ImageDetails = () => {
 
   return (
     <div className="flex-center h-screen p-5 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
-      <div className="flex flex-row">
+      <div className="flex flex-col lg:flex-row">
         <div className="mt-10 lg:mt-0">
           {imageUrl && (
             <Image
@@ -199,7 +199,7 @@ const ImageDetails = () => {
           </div>
         </div>
 
-        <div className="flex flex-col ml-5">
+        <div className="flex flex-col ml-5 mt-10 lg:mt-0">
           <div className="flex flex-row w-80 gap-1">
             <Input placeholder="type something..." />
             <Button>Post</Button>
