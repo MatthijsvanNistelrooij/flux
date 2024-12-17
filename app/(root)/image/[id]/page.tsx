@@ -168,11 +168,11 @@ const ImageDetails = () => {
     )
   if (error) return <p>{error}</p>
   if (!post) return <p>Post not found.</p>
-
   return (
-    <div className="flex-center p-5 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
-      <div className="flex flex-col lg:flex-row">
-        <div className="mt-20">
+    <div className="min-h-screen bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50 flex items-center justify-center p-5">
+      <div className="flex flex-col lg:flex-row items-start w-full max-w-6xl bg-white shadow-lg rounded-lg overflow-hidden">
+        {/* Left: Image Section */}
+        <div className="flex flex-col items-center w-full lg:w-[60%] p-5">
           {imageUrl && (
             <Image
               src={imageUrl}
@@ -180,31 +180,37 @@ const ImageDetails = () => {
               width={600}
               height={600}
               priority
+              className="rounded-lg"
             />
           )}
 
-          <div className="flex flex-row justify-between">
-            <div>
-              <FaTrash className="cursor-pointer m-5" onClick={deletePost} />
-            </div>
-
-            <div className="mt-2 text-center text-sm text-gray-700">
-              <p>{post.title}</p>
-              <p>Created by {post.user}</p>
+          {/* Actions & Details */}
+          <div className="flex flex-row justify-between items-center w-full mt-3">
+            <FaTrash
+              className="cursor-pointer text-gray-600 hover:text-red-500"
+              onClick={deletePost}
+            />
+            <div className="text-center text-gray-700">
+              <p className="text-lg font-semibold">{post.title}</p>
+              <p className="text-sm">Created by {post.user}</p>
             </div>
             <FaDownload
-              className="cursor-pointer m-5"
+              className="cursor-pointer text-gray-600 hover:text-green-500"
               onClick={handleDownload}
             />
           </div>
         </div>
 
-        <div className="flex flex-col ml-5 mt-10 lg:mt-0">
-          <div className="flex flex-row w-80 gap-1">
-            <Input placeholder="type something..." />
+        {/* Right: Comment Section */}
+        <div className="w-full lg:w-[40%] p-5 mt-5 lg:mt-0">
+          {/* Comment Input */}
+          <div className="flex flex-row gap-2 mb-5">
+            <Input placeholder="Type something..." />
             <Button>Post</Button>
           </div>
-          <div className="mt-5">
+
+          {/* Comments */}
+          <div className="space-y-3">
             {comments.map((comment, index) => (
               <CommentLine
                 key={index}
