@@ -181,7 +181,7 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
                     // onClick={deletePost}
                   />
                   <div className="text-center text-gray-700">
-                    <p className="text-lg font-semibold">{post.title}</p>
+                    <p className="text-lg">{post.title}</p>
                     <p className="text-sm">Created by {post.user}</p>
                   </div>
                   <FaDownload

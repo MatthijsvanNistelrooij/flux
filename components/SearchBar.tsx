@@ -1,6 +1,7 @@
+// SearchBar.jsx
 import React from "react"
 type SearchBarProps = {
-  onSearch: (query: string) => void
+  onSearch: (query: string) => void 
 }
 
 const SearchBar = ({ onSearch }: SearchBarProps) => {
