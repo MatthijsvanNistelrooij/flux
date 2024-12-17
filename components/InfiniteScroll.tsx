@@ -164,55 +164,61 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
       <SearchBar onSearch={setSearchQuery} />
 
       {filteredPosts.map((post) => (
-        <div
-          key={post.$id}
-          className="w-full flex flex-col items-center mb-10 0 h-screen justify-center"
-        >
-          <div className="flex w-full">
-            <div className="flex-1 relative">
-              {previews[post.$id] && (
-                <div className="relative w-full h-auto bg-black">
-                  <Image
-                    src={`${previews[post.$id]}`}
-                    alt={post.title}
-                    width={1920}
-                    height={1080}
-                    className="w-full h-auto object-cover"
-                  />
-                </div>
-              )}
+        <Link key={post.$id} href={`/image/${post.$id}`} className="bg-white">
+          <div>
+            {previews[post.$id] && (
+              <div
+                key={post.$id}
+                className="w-full flex flex-col items-center mb-10 0 h-screen justify-center"
+              >
+                <div className="flex w-full">
+                  <div className="flex-1 relative">
+                    {previews[post.$id] && (
+                      <div className="relative w-full h-auto bg-black">
+                        <Image
+                          src={`${previews[post.$id]}`}
+                          alt={post.title}
+                          width={1920}
+                          height={1080}
+                          className="w-full h-auto object-cover"
+                        />
+                      </div>
+                    )}
 
-              <div className="flex flex-row justify-between">
-                <div>
-                  <FaTrash className="cursor-pointer m-5" />
-                </div>
+                    <div className="flex flex-row justify-between">
+                      <div>
+                        <FaTrash className="cursor-pointer m-5" />
+                      </div>
 
-                <div className="mt-2 text-center text-sm text-gray-700">
-                  <p>{post.title}</p>
-                  <p>Created by {post.user}</p>
-                </div>
-                <FaDownload className="cursor-pointer m-5" />
-              </div>
-            </div>
+                      <div className="mt-2 text-center text-sm text-gray-700">
+                        <p>{post.title}</p>
+                        <p>Created by {post.user}</p>
+                      </div>
+                      <FaDownload className="cursor-pointer m-5" />
+                    </div>
+                  </div>
 
-            <div className="hidden lg:flex flex-col ml-5">
-              <div className="flex flex-row w-80 gap-1">
-                <Input placeholder="type something..." />
-                <Button>Post</Button>
+                  <div className="hidden lg:flex flex-col ml-5">
+                    <div className="flex flex-row w-80 gap-1">
+                      <Input placeholder="type something..." />
+                      <Button>Post</Button>
+                    </div>
+                    <div className="mt-5">
+                      {comments.map((comment, index) => (
+                        <CommentLine
+                          key={index}
+                          poster={comment.poster}
+                          content={comment.content}
+                          createdAt={comment.createdAt}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="mt-5">
-                {comments.map((comment, index) => (
-                  <CommentLine
-                    key={index}
-                    poster={comment.poster}
-                    content={comment.content}
-                    createdAt={comment.createdAt}
-                  />
-                ))}
-              </div>
-            </div>
+            )}
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   )
