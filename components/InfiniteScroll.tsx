@@ -166,8 +166,8 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
       {filteredPosts.map((post) => (
         <div className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5">
           {previews[post.$id] && (
-            <div className="relative w-full lg:w-2/3">
-              <Link key={post.$id} href={`/image/${post.$id}`}>
+            <div key={post.$id} className="relative w-full lg:w-2/3">
+              <Link href={`/image/${post.$id}`}>
                 <Image
                   src={`${previews[post.$id]}`}
                   alt={post.title}
@@ -175,20 +175,20 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
                   height={1080}
                   className="object-cover w-full"
                 />
-                            <div className="flex flex-row justify-between items-center w-full mt-3">
-              <FaTrash
-                className="cursor-pointer text-gray-600 hover:text-red-500"
-                // onClick={deletePost}
-              />
-              <div className="text-center text-gray-700">
-                <p className="text-lg font-semibold">{post.title}</p>
-                <p className="text-sm">Created by {post.user}</p>
-              </div>
-              <FaDownload
-                className="cursor-pointer text-gray-600 hover:text-green-500"
-                // onClick={handleDownload}
-              />
-            </div>
+                <div className="flex flex-row justify-between items-center w-full mt-3">
+                  <FaTrash
+                    className="cursor-pointer text-gray-600 hover:text-red-500"
+                    // onClick={deletePost}
+                  />
+                  <div className="text-center text-gray-700">
+                    <p className="text-lg font-semibold">{post.title}</p>
+                    <p className="text-sm">Created by {post.user}</p>
+                  </div>
+                  <FaDownload
+                    className="cursor-pointer text-gray-600 hover:text-green-500"
+                    // onClick={handleDownload}
+                  />
+                </div>
               </Link>
             </div>
           )}
