@@ -12,6 +12,7 @@ import { Button } from "./ui/button"
 import { sidebarLinks } from "@/constants"
 import logo from "../public/logo.svg"
 import Image from "next/image"
+import { Fa500Px, FaDashcube, FaFileContract, FaMailBulk } from "react-icons/fa"
 
 const Sidebar = () => {
   const [user, setUser] = useState<User | null>(null)
@@ -54,37 +55,34 @@ const Sidebar = () => {
             className="ml-4 mt-3"
           />
         </Link>
-        <div className="flex flex-col gap-2 p-5">
+        <div className="flex flex-col gap-5 p-5 mt-5">
           {sidebarLinks.map(({ route, label, imgURL }) => {
             const isActive =
               pathname === route || pathname.startsWith(`${route}/`)
 
             return (
-              <Link href={route} key={label}>
-                <Button
-                  className={`${
-                    isActive ? "text-orange-400" : "text-white"
-                  } w-full hover:text-orange-300`}
-                >
-                  {label}
-                </Button>
+              <Link
+                href={route}
+                key={label}
+                className={`font-bold text-xl flex flex-row gap-3 hover:bg-gray-100 p-3 rounded-lg text-center ${
+                  isActive ? "bg-gray-100 text-gray-700" : "text-gray-400 "
+                }`}
+              >
+                <Image
+                  src={imgURL}
+                  width={30}
+                  height={30}
+                  alt="icon"
+                  className={`${isActive && "brightness-50"}`}
+                />
+                {label}
               </Link>
             )
           })}
         </div>
       </div>
-      <div className="flex flex-col gap-2 justify-between p-3 border-t py-5">
+      <div className="flex flex-col gap-2 justify-between p-6 border-t py-5">
         {user ? <LogoutButton /> : <LoginButton />}
-
-        <Link href={"/contact"}>
-          <Button
-            className={`${
-              pathname === "/contact" ? "text-orange-400" : "text-white"
-            } w-full hover:text-orange-300`}
-          >
-            Contact
-          </Button>
-        </Link>
       </div>
     </nav>
   )

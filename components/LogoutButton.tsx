@@ -36,9 +36,18 @@ const LogoutButton = () => {
   }, [])
 
   return (
-    <Button onClick={handleLogout} className="flex items-center">
-      {isMobile ? <FaSignOutAlt /> : "Logout"}
-    </Button>
+    <div
+      onClick={handleLogout}
+      className="bg-white text-red-500 shadow-none text-lg font-bold flex cursor-pointer items-center border-none flex-row justify-start h-16 gap-2"
+    >
+      {isMobile ? (
+        <FaSignOutAlt className="text-2xl" />
+      ) : (
+        <>
+          <FaSignOutAlt className="text-2xl" /> Sign out
+        </>
+      )}
+    </div>
   )
 }
 
