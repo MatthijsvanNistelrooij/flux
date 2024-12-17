@@ -170,7 +170,7 @@ const ImageDetails = () => {
   if (!post) return <p>Post not found.</p>
 
   return (
-    <div className="flex-center h-screen p-5">
+    <div className="flex-center h-screen p-5 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
       <div className="flex flex-row">
         <div className="mt-10 lg:mt-0">
           {imageUrl && (

@@ -18,6 +18,7 @@ const Sidebar = () => {
   const [user, setUser] = useState<User | null>(null)
   const [userId, setUserId] = useState<string | null>(null)
   const pathname = usePathname()
+  const [isMobile, setIsMobile] = useState(false)
 
   console.log(pathname)
 
@@ -43,6 +44,17 @@ const Sidebar = () => {
     checkUser()
   }, [router])
 
+  useEffect(() => {
+    const checkWidth = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkWidth()
+    window.addEventListener("resize", checkWidth)
+
+    return () => window.removeEventListener("resize", checkWidth)
+  }, [])
+
   return (
     <nav className="sidebar">
       <div>
@@ -52,10 +64,10 @@ const Sidebar = () => {
             src={logo}
             width={40}
             height={40}
-            className="ml-4 mt-3"
+            className="m-5"
           />
         </Link>
-        <div className="flex flex-col gap-5 p-5 mt-5">
+        <div className="flex flex-col gap-5 p-3">
           {sidebarLinks.map(({ route, label, imgURL }) => {
             const isActive =
               pathname === route || pathname.startsWith(`${route}/`)
@@ -75,7 +87,7 @@ const Sidebar = () => {
                   alt="icon"
                   className={`${isActive && "brightness-50"}`}
                 />
-                {label}
+                {!isMobile && label}
               </Link>
             )
           })}

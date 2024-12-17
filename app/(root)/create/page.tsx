@@ -166,7 +166,7 @@ const ImageComponent: React.FC = () => {
   }
 
   return (
-    <section className="flex flex-col gap-3 items-center justify-center h-screen w-full">
+    <section className="flex flex-col gap-3 items-center justify-center h-screen w-full bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
       {loading && (
         <div className="flex justify-center items-center">
           <LoaderSpinner />

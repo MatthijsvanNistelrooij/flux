@@ -80,10 +80,10 @@ const Contact = () => {
   }
 
   return (
-    <section className="flex-center p-5 lg:p-0">
+    <section className="flex-center h-screen p-5 lg:p-0 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
       {alert.show && <Alert {...alert} />}
 
-      <div className="w-[500px] mt-40" onClick={(e) => e.stopPropagation()}>
+      <div className="lg:w-[500px] md:w-[400px] min-w-[300px]" onClick={(e) => e.stopPropagation()}>
         <form
           ref={formRef}
           onSubmit={handleSubmit}
