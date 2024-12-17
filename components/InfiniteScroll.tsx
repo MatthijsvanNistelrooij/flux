@@ -160,15 +160,15 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
   }
 
   return (
-    <div className="mx-auto mt-20 mb-40 max-w-xl lg:max-w-5xl">
+    <div className="mx-auto mt-20 mb-40 max-w-xl lg:max-w-6xl">
       <SearchBar onSearch={setSearchQuery} />
 
       {filteredPosts.map((post) => (
-        <Link key={post.$id} href={`/image/${post.$id}`}>
-          <div className="flex flex-col lg:flex-row border border-gray-300 rounded-lg shadow-lg overflow-hidden mt-40 p-5">
-            {/* Image Section */}
-            {previews[post.$id] && (
-              <div className="relative w-full lg:w-2/3">
+        <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg overflow-hidden mt-40 p-5">
+          {/* Image Section */}
+          {previews[post.$id] && (
+            <div className="relative w-full lg:w-2/3">
+              <Link key={post.$id} href={`/image/${post.$id}`}>
                 <Image
                   src={`${previews[post.$id]}`}
                   alt={post.title}
@@ -176,32 +176,28 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
                   height={1080}
                   className="object-cover w-full h-full"
                 />
-                <div className="absolute bottom-0 left-0 w-full flex justify-between p-4">
-                  <FaTrash className="text-white cursor-pointer" />
-                  <FaDownload className="text-white cursor-pointer" />
-                </div>
-              </div>
-            )}
+              </Link>
+            </div>
+          )}
 
-            {/* Comments Section */}
-            <div className="w-full lg:w-1/3 p-4 flex flex-col bg-white">
-              <div className="mb-4">
-                <Input placeholder="Type a comment..." />
-                <Button className="mt-2 w-full">Post</Button>
-              </div>
-              <div className="overflow-y-auto h-72">
-                {comments.map((comment, index) => (
-                  <CommentLine
-                    key={index}
-                    poster={comment.poster}
-                    content={comment.content}
-                    createdAt={comment.createdAt}
-                  />
-                ))}
-              </div>
+          {/* Comments Section */}
+          <div className="w-full lg:w-1/3 p-4 flex flex-col bg-white">
+            <div className="mb-4">
+              <Input placeholder="Type a comment..." />
+              <Button className="mt-2 w-full">Post</Button>
+            </div>
+            <div className="overflow-y-auto h-72">
+              {comments.map((comment, index) => (
+                <CommentLine
+                  key={index}
+                  poster={comment.poster}
+                  content={comment.content}
+                  createdAt={comment.createdAt}
+                />
+              ))}
             </div>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   )
