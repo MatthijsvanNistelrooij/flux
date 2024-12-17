@@ -64,7 +64,7 @@ const Sidebar = () => {
               <Link
                 href={route}
                 key={label}
-                className={`font-bold text-xl flex flex-row gap-3 hover:bg-gray-100 p-3 rounded-lg text-center ${
+                className={`font-bold text-lg flex flex-row gap-3 hover:bg-gray-100 p-3 rounded-lg text-center ${
                   isActive ? "bg-gray-100 text-gray-700" : "text-gray-400 "
                 }`}
               >
