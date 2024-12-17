@@ -124,7 +124,7 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
     content: string
     createdAt: string
   }) => (
-    <div className="p-2.5 border border-gray-300 rounded-lg mb-2 max-w-md flex flex-col relative">
+    <div className="w-full p-2.5 border border-gray-300 rounded-lg mb-2 flex flex-col relative">
       <p className="m-0 text-sm font-bold text-gray-800">{poster}</p>
       <p className="mt-0.5 mb-0 text-gray-600 text-sm">{content}</p>
       <p className="m-0 text-[10px] text-black absolute bottom-2 right-3">
@@ -160,12 +160,11 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
   }
 
   return (
-    <div className="mx-auto mt-20 mb-40 max-w-xl lg:max-w-6xl">
+    <div className="mx-auto mt-20 mb-40 max-w-xl lg:max-w-5xl">
       <SearchBar onSearch={setSearchQuery} />
 
       {filteredPosts.map((post) => (
-        <div className="flex flex-col lg:flex-row bg-white rounded-lg shadow-lg overflow-hidden mt-40 p-5">
-          {/* Image Section */}
+        <div className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5">
           {previews[post.$id] && (
             <div className="relative w-full lg:w-2/3">
               <Link key={post.$id} href={`/image/${post.$id}`}>
@@ -174,14 +173,27 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
                   alt={post.title}
                   width={1920}
                   height={1080}
-                  className="object-cover w-full h-full"
+                  className="object-cover w-full"
                 />
+                            <div className="flex flex-row justify-between items-center w-full mt-3">
+              <FaTrash
+                className="cursor-pointer text-gray-600 hover:text-red-500"
+                // onClick={deletePost}
+              />
+              <div className="text-center text-gray-700">
+                <p className="text-lg font-semibold">{post.title}</p>
+                <p className="text-sm">Created by {post.user}</p>
+              </div>
+              <FaDownload
+                className="cursor-pointer text-gray-600 hover:text-green-500"
+                // onClick={handleDownload}
+              />
+            </div>
               </Link>
             </div>
           )}
 
-          {/* Comments Section */}
-          <div className="w-full lg:w-1/3 p-4 flex flex-col bg-white">
+          <div className="w-full lg:w-1/3 pt-4 lg:pl-4 lg:pt-0 flex flex-col bg-white">
             <div className="mb-4">
               <Input placeholder="Type a comment..." />
               <Button className="mt-2 w-full">Post</Button>
