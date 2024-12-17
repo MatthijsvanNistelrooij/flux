@@ -164,9 +164,9 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
       <SearchBar onSearch={setSearchQuery} />
 
       {filteredPosts.map((post) => (
-        <div className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5">
+        <div key={post.$id} className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5">
           {previews[post.$id] && (
-            <div key={post.$id} className="relative w-full lg:w-2/3">
+            <div className="relative w-full lg:w-2/3">
               <Link href={`/image/${post.$id}`}>
                 <Image
                   src={`${previews[post.$id]}`}
