@@ -84,7 +84,7 @@ const Contact = () => {
       {alert.show && <Alert {...alert} />}
 
       {/* White card container */}
-      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-[500px]">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-[700px]">
         <h3 className="font-semibold text-2xl mb-6 text-center">Contact</h3>
         <form
           ref={formRef}
