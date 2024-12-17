@@ -142,7 +142,6 @@ const ImageDetails = () => {
     }
   }
 
-  // Component for individual comments
   const CommentLine = ({
     poster,
     content,

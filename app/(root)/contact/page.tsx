@@ -91,6 +91,7 @@ const Contact = () => {
           onClick={(e) => e.stopPropagation()}
         >
           <div className="flex flex-col gap-2">
+            <h3 className="font-semibold text-2xl mb-2">Contact</h3>
             <Input
               type="text"
               name="name"

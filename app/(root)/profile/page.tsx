@@ -2,17 +2,17 @@
 import Login from "@/app/(auth)/sign-in/page"
 import Collection from "@/components/Collection"
 import LoaderSpinner from "@/components/LoaderSpinner"
+import { User } from "@/types"
 import { Account, Client, Databases, ID } from "appwrite"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 
 const Profile = () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [tokens, setTokens] = useState(0)
   const [error, setError] = useState(null)
-
 
   console.log(user)
 
@@ -45,7 +45,6 @@ const Profile = () => {
             )
           } catch (docError) {
             if (docError.code === 404) {
-  
               console.log("User document not found, creating a new one...")
               await databases.createDocument(
                 process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID!,
@@ -58,7 +57,7 @@ const Profile = () => {
                   userId: $id,
                 }
               )
-              
+
               console.log("User document created successfully.")
             } else {
               console.error("Error checking user document:", docError)
@@ -122,7 +121,7 @@ const Profile = () => {
       <div className="bg-white rounded-lg shadow-lg p-6 mt-20 lg:mt-0">
         <h1 className="text-3xl font-semibold text-center">Profile</h1>
         <div className="mt-4 text-center">
-          <h2 className="text-xl font-bold">{user?.name}</h2>
+          <h2 className="text-xl font-bold">{user?.name || ""}</h2>
           <p className="mt-2 text-gray-500">You have {tokens} tokens.</p>
         </div>
         <div className="mt-6 flex justify-center">

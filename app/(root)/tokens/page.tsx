@@ -127,7 +127,7 @@ const TokenManager = () => {
 
   return (
     <div className="p-6 space-y-8">
-      <div className="bg-white rounded-lg shadow-sm p-6 mt-20 lg:mt-0">
+      <div className="bg-white rounded-lg shadow-lg p-6 mt-20 lg:mt-0">
         <h1 className="text-3xl font-semibold text-center">Tokens</h1>
         <div className="mt-4 text-center">
           <h2 className="text-xl font-bold">{user?.name}</h2>

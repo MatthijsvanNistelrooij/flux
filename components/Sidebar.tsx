@@ -18,6 +18,8 @@ const Sidebar = () => {
   const [userId, setUserId] = useState<string | null>(null)
   const pathname = usePathname()
 
+  console.log(pathname)
+
   const router = useRouter()
 
   const client = new Client()
@@ -43,44 +45,45 @@ const Sidebar = () => {
   return (
     <nav className="sidebar">
       <div>
-        <Link href={"/"} className="border-b p-3">
+        <Link href={"/"} className="">
           <Image
             alt="logo"
             src={logo}
             width={40}
             height={40}
-            className="ml-4 -mt-3"
+            className="ml-4 mt-3"
           />
         </Link>
-        <div className="flex flex-col gap-5 p-5">
+        <div className="flex flex-col gap-2 p-5">
           {sidebarLinks.map(({ route, label, imgURL }) => {
             const isActive =
               pathname === route || pathname.startsWith(`${route}/`)
 
             return (
-              <Link
-                href={route}
-                key={label}
-                className={cn(
-                  "inline-flex items-center justify-center text-sm font-bold rounded-md px-4 py-2 transition-colors",
-                  {
-                    "bg-[#171717] text-orange-400 hover:bg-[#272727] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#444444]":
-                      isActive,
-                    "text-gray-800 hover:bg-white hover:text-black": !isActive,
-                  }
-                )}
-              >
-                {label}
+              <Link href={route} key={label}>
+                <Button
+                  className={`${
+                    isActive ? "text-orange-400" : "text-white"
+                  } w-full hover:text-orange-300`}
+                >
+                  {label}
+                </Button>
               </Link>
             )
           })}
         </div>
       </div>
-      <div className="flex flex-row gap-2 justify-between p-3 border-t py-5">
+      <div className="flex flex-col gap-2 justify-between p-3 border-t py-5">
         {user ? <LogoutButton /> : <LoginButton />}
 
         <Link href={"/contact"}>
-          <Button>Contact</Button>
+          <Button
+            className={`${
+              pathname === "/contact" ? "text-orange-400" : "text-white"
+            } w-full hover:text-orange-300`}
+          >
+            Contact
+          </Button>
         </Link>
       </div>
     </nav>

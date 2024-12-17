@@ -174,7 +174,7 @@ const ImageComponent: React.FC = () => {
       )}
 
       {!loading && !imageUrl && (
-        <div className="flex flex-col lg:flex-row text-center gap-2 w-full max-w-3xl px-4">
+        <div className="flex flex-col lg:flex-row text-center gap-2 w-full max-w-5xl px-4">
           <Input
             type="text"
             value={prompt}
