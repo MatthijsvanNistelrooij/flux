@@ -49,8 +49,8 @@ const MobileNav = () => {
           <Image src={logo} alt="logo" width={40} height={40} />
         </Link>
 
-        <div className="flex items-center gap-4 md:gap-8 md:ml-10">
-          {sidebarLinks.map(({ route, label }) => {
+        <div className="flex items-center gap-5 md:gap-8 md:ml-10">
+          {sidebarLinks.map(({ route, label, imgURL }) => {
             const isActive =
               pathname === route || pathname.startsWith(`${route}/`)
             return (
@@ -64,7 +64,13 @@ const MobileNav = () => {
                   }
                 )}
               >
-                {label}
+                <Image
+                  src={imgURL}
+                  width={25}
+                  height={25}
+                  alt="icon"
+                  className={`${isActive && "brightness-50"}`}
+                />
               </Link>
             )
           })}
