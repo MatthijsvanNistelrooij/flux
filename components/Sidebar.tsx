@@ -8,11 +8,9 @@ import LogoutButton from "./LogoutButton"
 import { usePathname, useRouter } from "next/navigation"
 import { Account, Client } from "appwrite"
 import { User } from "@/types"
-import { Button } from "./ui/button"
 import { sidebarLinks } from "@/constants"
 import logo from "../public/logo.svg"
 import Image from "next/image"
-import { Fa500Px, FaDashcube, FaFileContract, FaMailBulk } from "react-icons/fa"
 
 const Sidebar = () => {
   const [user, setUser] = useState<User | null>(null)
