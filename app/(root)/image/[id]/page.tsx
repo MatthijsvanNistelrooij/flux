@@ -170,8 +170,8 @@ const ImageDetails = () => {
   if (!post) return <p>Post not found.</p>
   return (
     <div className="min-h-screen bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50 flex items-center justify-center p-5">
-      <div className="flex flex-col lg:flex-row items-start w-full max-w-6xl bg-white shadow-lg rounded-lg overflow-hidden">
-        {/* Left: Image Section */}
+      <div className="flex flex-col lg:flex-row items-start w-full max-w-6xl bg-white shadow-lg rounded-lg overflow-hidden mt-14 lg:mt-10">
+
         <div className="flex flex-col items-center w-full lg:w-[60%] p-5">
           {imageUrl && (
             <Image
