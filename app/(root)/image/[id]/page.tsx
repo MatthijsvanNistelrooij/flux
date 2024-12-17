@@ -172,7 +172,7 @@ const ImageDetails = () => {
   return (
     <div className="flex-center h-screen p-5 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
       <div className="flex flex-col lg:flex-row">
-        <div className="mt-10 my-40 lg:mt-0">
+        <div className="mt-10 lg:mt-0">
           {imageUrl && (
             <Image
               src={imageUrl}
