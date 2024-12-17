@@ -38,7 +38,7 @@ const LogoutButton = () => {
   return (
     <div
       onClick={handleLogout}
-      className="bg-white text-red-500 shadow-none text-lg font-bold flex cursor-pointer items-center border-none flex-row justify-start h-16 gap-2"
+      className="bg-white text-red-500 shadow-none font-bold flex cursor-pointer items-center border-none flex-row justify-start h-16 gap-2"
     >
       {isMobile ? (
         <FaSignOutAlt className="text-2xl" />

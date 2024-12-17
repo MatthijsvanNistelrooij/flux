@@ -64,14 +64,14 @@ const Sidebar = () => {
               <Link
                 href={route}
                 key={label}
-                className={`font-bold text-lg flex flex-row gap-3 hover:bg-gray-100 p-3 rounded-lg text-center ${
+                className={`font-bold flex flex-row gap-3 hover:bg-gray-100 p-3 rounded-lg text-center ${
                   isActive ? "bg-gray-100 text-gray-700" : "text-gray-400 "
                 }`}
               >
                 <Image
                   src={imgURL}
-                  width={30}
-                  height={30}
+                  width={25}
+                  height={25}
                   alt="icon"
                   className={`${isActive && "brightness-50"}`}
                 />
