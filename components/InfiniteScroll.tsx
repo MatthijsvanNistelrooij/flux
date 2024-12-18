@@ -160,52 +160,54 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
   }
 
   return (
-    <div className="mx-auto mt-20 mb-40 max-w-xl lg:max-w-5xl">
+    <div>
       <SearchBar onSearch={setSearchQuery} />
 
-      {filteredPosts.map((post) => (
-        <div
-          key={post.$id}
-          className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5"
-        >
-          {previews[post.$id] && (
-            <div className="relative w-full lg:w-2/3">
-              <Link href={`/image/${post.$id}`}>
-                <Image
-                  src={`${previews[post.$id]}`}
-                  alt={post.title}
-                  width={1920}
-                  height={1080}
-                  className="object-cover w-full rounded-lg"
-                />
-              </Link>
-              <div className="absolute bottom-2 w-full">
-                <div className="text-center text-white">
-                  <p className="text-lg font-semibold">{post.title}</p>
-                  <p className="text-xs">Created by {post.user}</p>
+      <div className="mx-auto mb-40 max-w-xl lg:max-w-5xl h-screen overflow-scroll">
+        {filteredPosts.map((post) => (
+          <div
+            key={post.$id}
+            className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5"
+          >
+            {previews[post.$id] && (
+              <div className="relative w-full lg:w-2/3">
+                <Link href={`/image/${post.$id}`}>
+                  <Image
+                    src={`${previews[post.$id]}`}
+                    alt={post.title}
+                    width={1920}
+                    height={1080}
+                    className="object-cover w-full rounded-lg"
+                  />
+                </Link>
+                <div className="absolute bottom-2 w-full">
+                  <div className="text-center text-white">
+                    <p className="text-lg font-semibold">{post.title}</p>
+                    <p className="text-xs">Created by {post.user}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div className="w-full lg:w-1/3 pt-4 lg:pl-4 lg:pt-0 flex flex-col bg-white">
-            <div className="mb-4">
-              <Input placeholder="Type a comment..." />
-              <Button className="mt-2 w-full">Post</Button>
-            </div>
-            <div className="overflow-y-auto h-72">
-              {comments.map((comment, index) => (
-                <CommentLine
-                  key={index}
-                  poster={comment.poster}
-                  content={comment.content}
-                  createdAt={comment.createdAt}
-                />
-              ))}
+            <div className="w-full lg:w-1/3 pt-4 lg:pl-4 lg:pt-0 flex flex-col bg-white">
+              <div className="mb-4">
+                <Input placeholder="Type a comment..." />
+                <Button className="mt-2 w-full">Post</Button>
+              </div>
+              <div className="overflow-y-auto h-72">
+                {comments.map((comment, index) => (
+                  <CommentLine
+                    key={index}
+                    poster={comment.poster}
+                    content={comment.content}
+                    createdAt={comment.createdAt}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

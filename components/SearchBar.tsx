@@ -6,7 +6,7 @@ type SearchBarProps = {
 
 const SearchBar = ({ onSearch }: SearchBarProps) => {
   return (
-    <div className="mb-5">
+    <div className="mb-5 mt-20 md:mt-0">
       <input
         type="text"
         placeholder="Search posts..."
