@@ -83,7 +83,6 @@ const Contact = () => {
     <section className="flex items-center justify-center h-screen p-5 bg-gradient-to-bl from-purple-50 via-blue-50 to-orange-50">
       {alert.show && <Alert {...alert} />}
 
-      {/* White card container */}
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-[700px]">
         <h3 className="font-semibold text-2xl mb-6 text-center">Contact</h3>
         <form
@@ -92,41 +91,33 @@ const Contact = () => {
           className="flex flex-col space-y-5"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex flex-col gap-2">
-            <Input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              required
-              placeholder="Naam"
-              className="border-gray-300 focus:ring focus:ring-indigo-200"
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              required
-              placeholder="E-mail"
-              className="border-gray-300 focus:ring focus:ring-indigo-200"
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <Textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              placeholder="Je bericht"
-              className="border-gray-300 focus:ring focus:ring-indigo-200"
-            />
-          </div>
+          <Input
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+            placeholder="Naam"
+            className="border-gray-300 focus:ring focus:ring-indigo-200"
+          />
+          <Input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            placeholder="E-mail"
+            className="border-gray-300 focus:ring focus:ring-indigo-200"
+          />
+          <Textarea
+            name="message"
+            value={form.message}
+            onChange={handleChange}
+            required
+            rows={5}
+            placeholder="Je bericht"
+            className="border-gray-300 focus:ring focus:ring-indigo-200"
+          />
           <Button
             className="rounded-lg p-2 w-full text-white"
             type="submit"

@@ -164,7 +164,10 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
       <SearchBar onSearch={setSearchQuery} />
 
       {filteredPosts.map((post) => (
-        <div key={post.$id} className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5">
+        <div
+          key={post.$id}
+          className="flex flex-col lg:flex-row rounded-lg shadow-lg overflow-hidden mb-40 bg-white p-5"
+        >
           {previews[post.$id] && (
             <div className="relative w-full lg:w-2/3">
               <Link href={`/image/${post.$id}`}>
@@ -173,10 +176,15 @@ const InfiniteScroll = ({ filter }: CollectionProps) => {
                   alt={post.title}
                   width={1920}
                   height={1080}
-                  className="object-cover w-full rounded-md"
+                  className="object-cover w-full rounded-lg"
                 />
-
               </Link>
+              <div className="absolute bottom-2 w-full">
+                <div className="text-center text-white">
+                  <p className="text-lg font-semibold">{post.title}</p>
+                  <p className="text-xs">Created by {post.user}</p>
+                </div>
+              </div>
             </div>
           )}
 
